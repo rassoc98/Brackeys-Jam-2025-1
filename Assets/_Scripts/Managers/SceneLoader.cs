@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    private static readonly int SceneChanged = Animator.StringToHash("SceneChanged");
+    private static readonly int SceneStart = Animator.StringToHash("SceneStart");
     [SerializeField] private GameObject screenTransitionOverlay;
 
     private void Awake()
@@ -13,7 +15,7 @@ public class SceneLoader : MonoBehaviour
 
     private void Start()
     {
-        screenTransitionOverlay.GetComponent<Animator>().SetTrigger("SceneStart");
+        screenTransitionOverlay.GetComponent<Animator>().SetTrigger(SceneStart);
     }
 
     private void OnDestroy()
@@ -33,16 +35,10 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
     private IEnumerator LoadScene(int index)
     {
-        screenTransitionOverlay.GetComponent<Animator>().SetTrigger("SceneChanged");
+        screenTransitionOverlay.GetComponent<Animator>().SetTrigger(SceneChanged);
         yield return new WaitForSecondsRealtime(1.1f);
         SceneManager.LoadScene(index);
-        yield return null;
     }
 }
