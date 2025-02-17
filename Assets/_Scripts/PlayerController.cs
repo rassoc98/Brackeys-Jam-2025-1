@@ -1,83 +1,87 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections;
-using UnityEngine.InputSystem;
-using UnityEngine.Events;
+using System.Linq;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("External References")]
     [SerializeField] private BoxCollider2D groundCheck;
-    private Rigidbody2D rb;
+    private Rigidbody2D _rb;
 
     [Header("Movement")]
     [SerializeField] private float jumpForce;
+    [SerializeField] private KeyCode[] jumpKeys;
     [SerializeField] private float moveSpeed;
-    [SerializeField] private float accelleration;
-
-    private float moveInput;
+    [SerializeField] private float acceleration;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
+    }
+    
+    private void FixedUpdate()
+    {
+        HandleMovement();
     }
 
-    private void Update()
+    private void HandleMovement()
     {
-        HandleInputs();
-    }
+         Vector2 direction = Input.GetAxisRaw("Horizontal") * Vector2.right;
+         
+        _rb.AddForce(acceleration * direction);
+        _rb.linearVelocityX = Mathf.Clamp(_rb.linearVelocityX, -moveSpeed, moveSpeed);
 
-    public void HandleInputs()
-    {
-        if (Input.GetKey(KeyCode.RightArrow)) moveInput = 1;
-        else if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.LeftArrow)) moveInput = 0;
-        else if (Input.GetKey(KeyCode.LeftArrow)) moveInput = -1;
-        else moveInput = 0;
+        if (!IsJumpKeyPressed()) return;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (IsGrounded())
         {
-            if (Grounded()) Jump();
-            else 
-            {
-                StopCoroutine(JumpBuffer());
-                StartCoroutine(JumpBuffer());
-            }
+            Jump();
+        }
+        else 
+        {
+            StopCoroutine(JumpWhenGrounded(0.2f));
+            StartCoroutine(JumpWhenGrounded(0.2f));
         }
     }
 
-    private bool Grounded()
+    private bool IsJumpKeyPressed()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(transform.position + (Vector3)groundCheck.offset, groundCheck.bounds.size, 0f, Vector2.down, 0.1f);
+        return jumpKeys.Any(Input.GetKey);
+    }
+
+    private bool IsGrounded()
+    {
+        RaycastHit2D hit = Physics2D.BoxCast(
+            origin: transform.position + (Vector3)groundCheck.offset,
+            size: groundCheck.bounds.size,
+            angle: 0f,
+            direction: Vector2.down,
+            distance: 0.1f
+        );
+        
         return hit;
     }
 
     private void Jump()
     {
-        rb.linearVelocityY = 0f;
-        rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
+        _rb.linearVelocityY = 0f;
+        _rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
     }
 
-    private IEnumerator JumpBuffer()
+    private IEnumerator JumpWhenGrounded(float timeWindowSeconds = Mathf.Infinity)
     {
-        float _jumpBufferTime = 0.2f;
-        float _timer = 0f;
+        float timer = 0f;
 
-        while (_timer <= _jumpBufferTime)
+        while (timer <= timeWindowSeconds)
         {
-            _timer += Time.deltaTime;
-            if (Grounded())
+            timer += Time.deltaTime;
+            if (IsGrounded())
             {
                 Jump();
                 break;
-            }             
+            }
+            
             yield return null;
         }
-
-    }
-
-    private void FixedUpdate()
-    {
-        rb.AddForce(moveInput * accelleration * Vector2.right);
-        if (Mathf.Abs(rb.linearVelocityX) >= moveSpeed) rb.linearVelocityX = moveSpeed * Mathf.Sign(rb.linearVelocityX);
     }
 }
