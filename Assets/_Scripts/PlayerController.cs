@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Linq;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
     [Header("External References")]
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour
         _rb.AddForce(acceleration * direction);
         _rb.linearVelocityX = Mathf.Clamp(_rb.linearVelocityX, -moveSpeed, moveSpeed);
 
-        if (!IsJumpKeyPressed()) return;
+        if (!jumpKeys.Any(Input.GetKey)) return;
 
         if (IsGrounded())
         {
@@ -44,11 +45,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private bool IsJumpKeyPressed()
-    {
-        return jumpKeys.Any(Input.GetKey);
-    }
-
     private bool IsGrounded()
     {
         RaycastHit2D hit = Physics2D.BoxCast(
@@ -59,7 +55,7 @@ public class PlayerController : MonoBehaviour
             distance: 0.1f
         );
         
-        return hit;
+        return hit.collider != null && hit.collider.gameObject.CompareTag("Floor");
     }
 
     private void Jump()
