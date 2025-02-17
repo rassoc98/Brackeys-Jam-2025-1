@@ -729,7 +729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c3c286fb255a44d95e1f8712be795b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFXObject: {fileID: 2307232858325309307, guid: c3adac9f74a876146ba01db7aad64713, type: 3}
+  sounds: []
 --- !u!1 &901446330
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,6 +899,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dc543a075e039846b2d0c8a861ef066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabs:
+  - objectType: 1
+    gameObject: {fileID: 2307232858325309307, guid: c3adac9f74a876146ba01db7aad64713, type: 3}
 --- !u!1 &1025290597
 GameObject:
   m_ObjectHideFlags: 0
