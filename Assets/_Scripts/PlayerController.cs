@@ -61,7 +61,9 @@ public class PlayerController : MonoBehaviour
             distance: 0.1f
         );
         
-        return hit.collider != null && hit.collider.gameObject.CompareTag("Floor");
+        if (hit.collider == null) return false;
+        
+        return hit.collider.gameObject.CompareTag("Floor");
     }
 
     private void Jump()
@@ -85,5 +87,10 @@ public class PlayerController : MonoBehaviour
             
             yield return null;
         }
+    }
+
+    public float GetSpeed()
+    {
+        return moveSpeed;
     }
 }

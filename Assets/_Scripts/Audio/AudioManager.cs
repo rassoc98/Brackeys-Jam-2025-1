@@ -30,7 +30,7 @@ public class AudioManager : MonoBehaviour {
         _objectPoolManager = FindFirstObjectByType<ObjectPoolManager>();
     }
 
-    public IEnumerator Play(string soundName, Vector3 position = new(), float volume = 1.0f) 
+    public IEnumerator Play(string soundName, Vector3 position = new(), float volume = 0.5f) 
     {
         var soundObject = _objectPoolManager.Spawn(ObjectPoolManager.ObjectType.SoundObject);
         soundObject.transform.position = position;
@@ -39,7 +39,7 @@ public class AudioManager : MonoBehaviour {
         var sound = Array.Find(sounds, sound => sound.name == soundName);
         
         audioSource.clip = sound.clip;
-        audioSource.volume = sound.volume * volume;
+        audioSource.volume = (sound.volume + volume) / 2f;
         audioSource.pitch = sound.pitch;
         audioSource.Play();
 

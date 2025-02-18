@@ -1,34 +1,39 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Scripting.APIUpdating;
 
 public class PlayerCatchingHazard : MonoBehaviour
 {
-    [SerializeField] float transitionTime;
-    BoxCollider2D bc;
+    [SerializeField] private float maxDistance;
+    [SerializeField] private Trigger trigger;
+    
+    private GameObject _player;
 
     // Simple script for mobile hazards that move to try and catch the player after they hit a trigger
 
     private void Awake()
     {
-        bc = GetComponent<BoxCollider2D>();
+        trigger.OnTrigger += StartMoving;
+        _player = GameObject.FindWithTag("Player");
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void StartMoving()
     {
-        if (collision.CompareTag("Player"))
-        {
-            StartCoroutine(Move(collision.attachedRigidbody.linearVelocityX));
-            bc.enabled = false;
-        }
+        StopAllCoroutines();
+        StartCoroutine(Move());
     }
 
-    private IEnumerator Move(float speed)
+    private IEnumerator Move()
     {
-        for(float f = 0; f <= transitionTime; f += Time.deltaTime)
+        Vector3 initialPosition = transform.position;
+        var playerRb = _player.GetComponent<Rigidbody2D>();
+        
+        while (Vector3.Distance(initialPosition, transform.position) < maxDistance)
         {
-            transform.position += speed * Time.deltaTime * Vector3.right;
+            if (_player == null) break;
+            
+            Vector3 direction = Mathf.Sign(_player.transform.position.x - transform.position.x) * Vector3.right;
+            float speed = Mathf.Abs(playerRb.linearVelocityX);
+            transform.Translate(speed * Time.deltaTime * direction );
             yield return null;
         }
     }
