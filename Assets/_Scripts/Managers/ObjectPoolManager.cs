@@ -57,7 +57,10 @@ public class ObjectPoolManager : MonoBehaviour
         else
         {
             pool.InactiveObjects.Dequeue();
+            pool.ActiveObjects.Add(obj);
             obj.SetActive(true);
+            obj.transform.position = position;
+            obj.transform.rotation = rotation;
         }
 
         return obj;
