@@ -3,8 +3,8 @@ using UnityEngine;
 
 public abstract class PoolObject : MonoBehaviour
 {
-    public static event Action<PoolObject> OnPoolObjectRecycle;
     public ObjectPoolManager.ObjectType objectType;
+    public static event Action<PoolObject> OnPoolObjectRecycle;
 
     public void Recycle()
     {

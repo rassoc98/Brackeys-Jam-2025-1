@@ -1,17 +1,13 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class AudioMixerScript : MonoBehaviour
 {
-    [SerializeField]
-    private AudioMixer mixer;
+    [SerializeField] private AudioMixer mixer;
 
-    [SerializeField]
-    private Slider Master, BGM, SFX;
+    [SerializeField] private Slider Master, BGM, SFX;
 
     private void Start()
     {
@@ -54,7 +50,6 @@ public class AudioMixerScript : MonoBehaviour
     {
         PlayerPrefs.SetFloat("BGM", value);
         mixer.SetFloat("BGM", MathF.Log10(value) * 20f);
-
     }
 
     public void SetSFXVolume(float value)

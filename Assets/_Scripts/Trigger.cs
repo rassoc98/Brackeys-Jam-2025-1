@@ -4,11 +4,10 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class Trigger : MonoBehaviour
 {
-    public event Action OnTrigger;
     [SerializeField] private bool triggeredOnce = true;
-    
+
     private bool _isTriggered;
-    
+
     private void Awake()
     {
         GetComponent<Collider2D>().isTrigger = true;
@@ -21,4 +20,5 @@ public class Trigger : MonoBehaviour
         _isTriggered = true;
     }
 
+    public event Action OnTrigger;
 }

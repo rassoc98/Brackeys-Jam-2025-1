@@ -22,13 +22,13 @@ public class SceneLoader : MonoBehaviour
     {
         Player.OnPlayerDeath -= ReloadScene;
     }
-    
+
     public void ReloadScene()
     {
         StopAllCoroutines();
         StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex));
     }
-    
+
     public void LoadNextScene()
     {
         StopAllCoroutines();

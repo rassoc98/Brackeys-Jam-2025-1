@@ -1,26 +1,26 @@
-using UnityEngine;
 using System.Collections;
 using System.Linq;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    [Header("External References")]
-    [SerializeField] private BoxCollider2D groundCheck;
-    private Rigidbody2D _rb;
+    [Header("External References")] [SerializeField]
+    private BoxCollider2D groundCheck;
 
-    [Header("Movement")]
-    [SerializeField] private float jumpForce;
+    [Header("Movement")] [SerializeField] private float jumpForce;
+
     [SerializeField] private KeyCode[] jumpKeys;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float acceleration;
     [SerializeField] private float friction = 0.5f;
+    private Rigidbody2D _rb;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
     }
-    
+
     private void FixedUpdate()
     {
         HandleMovement();
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
-        Vector2 direction = Input.GetAxisRaw("Horizontal") * Vector2.right;
+        var direction = Input.GetAxisRaw("Horizontal") * Vector2.right;
         //moved handling decelleration away from the material, so we now slide down walls instead of getting stuck on them
 
         if (Input.GetAxisRaw("Horizontal") != 0)
@@ -36,7 +36,10 @@ public class PlayerController : MonoBehaviour
             _rb.AddForce(acceleration * direction);
             _rb.linearVelocityX = Mathf.Clamp(_rb.linearVelocityX, -moveSpeed, moveSpeed);
         }
-        else _rb.linearVelocityX = Mathf.Lerp(_rb.linearVelocityX, 0, friction); 
+        else
+        {
+            _rb.linearVelocityX = Mathf.Lerp(_rb.linearVelocityX, 0, friction);
+        }
 
         if (!jumpKeys.Any(Input.GetKey)) return;
 
@@ -44,7 +47,7 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
-        else 
+        else
         {
             StopCoroutine(JumpWhenGrounded(0.2f));
             StartCoroutine(JumpWhenGrounded(0.2f));
@@ -53,16 +56,16 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(
-            origin: transform.position + (Vector3)groundCheck.offset,
-            size: groundCheck.bounds.size,
-            angle: 0f,
-            direction: Vector2.down,
-            distance: 0.1f
+        var hit = Physics2D.BoxCast(
+            transform.position + (Vector3)groundCheck.offset,
+            groundCheck.bounds.size,
+            0f,
+            Vector2.down,
+            0.1f
         );
-        
+
         if (hit.collider == null) return false;
-        
+
         return hit.collider.gameObject.CompareTag("Floor");
     }
 
@@ -74,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator JumpWhenGrounded(float timeWindowSeconds = Mathf.Infinity)
     {
-        float timer = 0f;
+        var timer = 0f;
 
         while (timer <= timeWindowSeconds)
         {
@@ -84,13 +87,8 @@ public class PlayerController : MonoBehaviour
                 Jump();
                 break;
             }
-            
+
             yield return null;
         }
-    }
-
-    public float GetSpeed()
-    {
-        return moveSpeed;
     }
 }
