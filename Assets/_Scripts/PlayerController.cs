@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode[] jumpKeys;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float acceleration;
+    [SerializeField] private float friction = 0.5f;
 
     private void Awake()
     {
@@ -27,10 +28,15 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
-         Vector2 direction = Input.GetAxisRaw("Horizontal") * Vector2.right;
-         
-        _rb.AddForce(acceleration * direction);
-        _rb.linearVelocityX = Mathf.Clamp(_rb.linearVelocityX, -moveSpeed, moveSpeed);
+        Vector2 direction = Input.GetAxisRaw("Horizontal") * Vector2.right;
+        //moved handling decelleration away from the material, so we now slide down walls instead of getting stuck on them
+
+        if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            _rb.AddForce(acceleration * direction);
+            _rb.linearVelocityX = Mathf.Clamp(_rb.linearVelocityX, -moveSpeed, moveSpeed);
+        }
+        else _rb.linearVelocityX = Mathf.Lerp(_rb.linearVelocityX, 0, friction); 
 
         if (!jumpKeys.Any(Input.GetKey)) return;
 
