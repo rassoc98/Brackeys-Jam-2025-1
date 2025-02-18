@@ -3,13 +3,12 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Scripting.APIUpdating;
 
-public class MovingHazard : MonoBehaviour
+public class PlayerCatchingHazard : MonoBehaviour
 {
-    [SerializeField] Transform targetPosition;
     [SerializeField] float transitionTime;
     BoxCollider2D bc;
 
-    // Simple script for mobile hazards that move once after a trigger
+    // Simple script for mobile hazards that move to try and catch the player after they hit a trigger
 
     private void Awake()
     {
@@ -20,20 +19,16 @@ public class MovingHazard : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            StartCoroutine(Move());
+            StartCoroutine(Move(collision.attachedRigidbody.linearVelocityX));
             bc.enabled = false;
         }
     }
 
-    private IEnumerator Move()
+    private IEnumerator Move(float speed)
     {
-        Vector3 startPosition = transform.position;
-        Vector3 endPosition = targetPosition.position;
-
         for(float f = 0; f <= transitionTime; f += Time.deltaTime)
         {
-            float lerpValue = f / transitionTime;
-            transform.position = Vector3.Lerp(startPosition, endPosition, lerpValue);
+            transform.position += speed * Time.deltaTime * Vector3.right;
             yield return null;
         }
     }
