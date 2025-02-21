@@ -1,21 +1,26 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 
+namespace Audio
+{
 /// <summary>
 ///     The Audio Manager is used to play audio (both SFX and music, however, music is not implemented yet).
 ///     The Audio Manager stores an array of all the game's sounds, each sound has a name that'll be used for playing it,
-///     Sound could be played by using AudioManager.Instance.Play(soundName, [optional] position, [optional] volume).
+///     Sound could be played by using AudioManager.Instance.PlaySound(soundName, [optional] position, [optional] volume).
 /// </summary>
 
 // TODO: Music
+[RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
     [SerializeField] private Sound[] sounds;
-
-    private ObjectPoolManager _objectPoolManager;
+    [SerializeField] private GameObject soundObjectPrefab;
+    
+    private AudioSource _audioSource;
 
     private void Awake()
     {
@@ -23,13 +28,28 @@ public class AudioManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+        
+        _audioSource = GetComponent<AudioSource>();
+    }
+    
+    public void PlaySound(string soundName, Vector3 position = new(), float volume = 0.5f)
+    {
+        StartCoroutine(Play(soundName, position, volume));
+    }
+    
+    public void PlaySoundOnce(string soundName, float volume = 0.5f)
+    {
+        var sound = Array.Find(sounds, sound => sound.name == soundName);
 
-        _objectPoolManager = FindFirstObjectByType<ObjectPoolManager>();
+        _audioSource.clip = sound.clip;
+        _audioSource.volume = (sound.volume + volume) / 2f;
+        _audioSource.pitch = sound.pitch;
+        _audioSource.Play();
     }
 
-    public IEnumerator Play(string soundName, Vector3 position = new(), float volume = 0.5f)
+    private IEnumerator Play(string soundName, Vector3 position = new(), float volume = 0.5f)
     {
-        var soundObject = _objectPoolManager.Spawn(ObjectPoolManager.ObjectType.SoundObject);
+        var soundObject = Instantiate(soundObjectPrefab, position, Quaternion.identity);
         soundObject.transform.position = position;
 
         var audioSource = soundObject.GetComponent<AudioSource>();
@@ -43,7 +63,7 @@ public class AudioManager : MonoBehaviour
         var clipLength = audioSource.clip.length;
         yield return new WaitForSeconds(clipLength);
 
-        _objectPoolManager.Deactivate(soundObject.GetComponent<PoolObject>());
+        Destroy(soundObject);
     }
 }
 
@@ -57,4 +77,5 @@ internal class Sound
     [Range(0f, 1f)] public float volume;
 
     [Range(0.2f, 5f)] public float pitch;
+}
 }

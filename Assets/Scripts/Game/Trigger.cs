@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+namespace Game
+{
 [RequireComponent(typeof(Collider2D))]
 public class Trigger : MonoBehaviour
 {
@@ -21,4 +23,5 @@ public class Trigger : MonoBehaviour
     }
 
     public event Action OnTrigger;
+}
 }

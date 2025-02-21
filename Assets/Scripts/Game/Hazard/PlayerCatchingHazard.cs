@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
+namespace Game.Hazard
+{
 public class PlayerCatchingHazard : MonoBehaviour
 {
     [SerializeField] private float maxDistance;
@@ -37,4 +39,5 @@ public class PlayerCatchingHazard : MonoBehaviour
             yield return null;
         }
     }
+}
 }

@@ -1,6 +1,6 @@
-using System;
 using System.Collections;
 using System.Linq;
+using Audio;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
         _animator.SetBool(IsJumping, isJumping);
         _animator.SetBool(IsFalling, isFalling);
         
-        _spriteRenderer.flipX = (int) Mathf.Sign(Input.GetAxisRaw("Horizontal")) != 1;
+        _spriteRenderer.flipX = (int) Input.GetAxisRaw("Horizontal") != 1;
     }
 
     private bool IsGrounded()
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
             groundCheck.bounds.size,
             0f,
             Vector2.down,
-            1.0f
+            0f
         );
 
         return hit.collider != null && hit.collider.gameObject.CompareTag("Floor");
@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour
     {
         _rb.linearVelocityY = 0f;
         _rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
+        AudioManager.Instance.PlaySoundOnce("Jump");
     }
 
     private IEnumerator JumpWhenGrounded(float timeWindowSeconds = Mathf.Infinity)

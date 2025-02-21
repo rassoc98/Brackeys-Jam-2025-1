@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace Game.Entity
+{
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour
 {
@@ -13,10 +15,12 @@ public class Enemy : MonoBehaviour
     private float _patrolDirection = 1f;
     private GameObject _player;
     private Rigidbody2D _rb;
+    private SpriteRenderer _renderer;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _renderer = GetComponent<SpriteRenderer>();
         _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         _player = GameObject.FindWithTag("Player");
         chaseTrigger.OnTrigger += () => { _currentState = State.Chase; };
@@ -35,6 +39,8 @@ public class Enemy : MonoBehaviour
             case State.Chase: Chase(); break;
             default: Patrol(); break;
         }
+        
+        _renderer.flipX = _rb.linearVelocityX < 0f;
     }
 
     private void Patrol(float deltaTime = 1f)
@@ -70,4 +76,5 @@ public class Enemy : MonoBehaviour
         Patrol,
         Chase
     }
+}
 }

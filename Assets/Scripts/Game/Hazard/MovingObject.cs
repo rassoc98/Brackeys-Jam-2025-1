@@ -3,6 +3,8 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
+namespace Game.Hazard
+{
 public class MovingObject : MonoBehaviour
 {
     [SerializeField] private MoveInfo[] moveInfos;
@@ -42,4 +44,5 @@ public class MoveInfo
     public Vector3 translation;
 
     public float transitionTime;
+}
 }

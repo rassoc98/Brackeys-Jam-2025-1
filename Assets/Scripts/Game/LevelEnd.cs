@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace Game
+{
 [RequireComponent(typeof(Collider2D))]
 public class LevelEnd : MonoBehaviour
 {
@@ -13,4 +15,5 @@ public class LevelEnd : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         FindFirstObjectByType<SceneLoader>().LoadNextScene();
     }
+}
 }

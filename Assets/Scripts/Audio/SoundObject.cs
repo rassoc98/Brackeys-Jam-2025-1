@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace Audio
+{
 [RequireComponent(typeof(AudioSource))]
 public class SoundObject : PoolObject
 {
@@ -7,4 +9,5 @@ public class SoundObject : PoolObject
     {
         objectType = ObjectPoolManager.ObjectType.SoundObject;
     }
+}
 }

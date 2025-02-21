@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
+namespace Audio
+{
 public class AudioMixerScript : MonoBehaviour
 {
     [SerializeField] private AudioMixer mixer;
@@ -57,4 +59,5 @@ public class AudioMixerScript : MonoBehaviour
         PlayerPrefs.SetFloat("SFX", value);
         mixer.SetFloat("SFX", MathF.Log10(value) * 20f);
     }
+}
 }
