@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
             _rb.linearVelocityX = Mathf.Lerp(_rb.linearVelocityX, 0, friction);
         }
 
-        if (!jumpKeys.Any(Input.GetKey)) return;
+        if (!jumpKeys.Any(Input.GetKeyDown)) return;
 
         if (IsGrounded())
         {

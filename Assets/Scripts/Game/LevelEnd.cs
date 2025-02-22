@@ -13,6 +13,7 @@ public class LevelEnd : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
+        Destroy(other.gameObject);
         FindFirstObjectByType<SceneLoader>().LoadNextScene();
     }
 }

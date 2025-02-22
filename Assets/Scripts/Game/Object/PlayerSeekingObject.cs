@@ -1,12 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Game.Hazard
+namespace Game.Object
 {
-public class PlayerCatchingHazard : MonoBehaviour
+public class PlayerSeekingObject : MonoBehaviour
 {
     [SerializeField] private float maxDistance;
     [SerializeField] private Trigger trigger;
+    [SerializeField] private bool xAxis, yAxis;
 
     private GameObject _player;
 
@@ -31,12 +32,25 @@ public class PlayerCatchingHazard : MonoBehaviour
 
         while (Vector3.Distance(initialPosition, transform.position) < maxDistance)
         {
-            if (_player == null) break;
-
-            var direction = Mathf.Sign(_player.transform.position.x - transform.position.x) * Vector3.right;
-            var speed = Mathf.Abs(playerRb.linearVelocityX);
-            transform.Translate(speed * Time.deltaTime * direction);
+            Move(playerRb);
             yield return null;
+        }
+    }
+
+    private void Move(Rigidbody2D playerRigidBody)
+    {
+        if (xAxis)
+        {
+            var direction = Mathf.Sign(_player.transform.position.x - transform.position.x) * Vector3.right;
+            var speed = Mathf.Abs(playerRigidBody.linearVelocityX);
+            transform.Translate(speed * Time.deltaTime * direction);
+        }
+
+        if (yAxis)
+        {
+            var direction = Mathf.Sign(_player.transform.position.y - transform.position.y) * Vector3.up;
+            var speed = Mathf.Abs(playerRigidBody.linearVelocityY);
+            transform.Translate(speed * Time.deltaTime * direction);
         }
     }
 }

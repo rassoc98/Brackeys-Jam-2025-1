@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Game
@@ -7,7 +8,8 @@ namespace Game
 public class Trigger : MonoBehaviour
 {
     [SerializeField] private bool triggeredOnce = true;
-
+    [SerializeField] private float delay;
+    
     private bool _isTriggered;
 
     private void Awake()
@@ -18,8 +20,26 @@ public class Trigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player") || (triggeredOnce && _isTriggered)) return;
-        OnTrigger?.Invoke();
+        
         _isTriggered = true;
+        StartCoroutine(HandleTrigger());
+    }
+
+    private IEnumerator HandleTrigger()
+    {
+        var isInvoked = false;
+        var timer = 0f;
+        
+        while (!isInvoked)
+        {
+            yield return null;
+            
+            timer += Time.deltaTime;
+            if (timer < delay) continue;
+        
+            OnTrigger?.Invoke();
+            isInvoked = true;
+        }
     }
 
     public event Action OnTrigger;

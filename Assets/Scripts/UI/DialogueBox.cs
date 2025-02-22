@@ -8,15 +8,18 @@ namespace UI
 public class DialogueBox : MonoBehaviour
 {
     [SerializeField] private Conversation[] conversations;
-    [SerializeField] private float charAppearDelay = 0.5f;
+    [SerializeField] private bool playOnStart = true;
+    [SerializeField] private float charAppearDelay = 0.05f;
     [SerializeField] private Sprite playerPortrait;
     [SerializeField] private Sprite bossPortrait;
+    [SerializeField] private Sprite nonePortrait;
     [Header("UI Elements")]
     [SerializeField] private Text dialogueText;
     [SerializeField] private Image portrait;
     
     private int _currentConversationIndex;
     private CanvasGroup _canvasGroup;
+    private float _timer;
 
     public void Awake()
     {
@@ -26,11 +29,14 @@ public class DialogueBox : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            StopAllCoroutines();
-            StartCoroutine(PlayNextConversation());
-        }
+        _timer += Time.deltaTime;
+        if (!(_timer >= 1.1f) || !playOnStart) return; // scene transition time
+        
+        StopAllCoroutines();
+        StartCoroutine(PlayNextConversation());
+            
+        _timer = 0f;
+        playOnStart = false;
     }
 
     public IEnumerator PlayNextConversation()
@@ -74,12 +80,10 @@ public class DialogueBox : MonoBehaviour
         portrait.sprite = character switch
         {
             Dialogue.Character.Player => playerPortrait,
-            Dialogue.Character.Boss => bossPortrait,
-            Dialogue.Character.None => null,
-            _ => null
+            Dialogue.Character.Boss   => bossPortrait,
+            Dialogue.Character.None   => nonePortrait,
+            _ => nonePortrait
         };
-
-        portrait.color = portrait.sprite == null ? Color.clear : Color.white;
     }
 
     private void ShowDialogueBox()
@@ -91,7 +95,6 @@ public class DialogueBox : MonoBehaviour
     {
         _canvasGroup.alpha = 0;
     }
-}
 }
 
 [Serializable]
@@ -112,4 +115,5 @@ internal class Dialogue
         Player,
         Boss
     }
+}
 }
