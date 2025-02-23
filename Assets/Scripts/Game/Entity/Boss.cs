@@ -70,6 +70,8 @@ public class Boss : MonoBehaviour
     private IEnumerator EndScene()
     {
         //yield return FindFirstObjectByType<DialogueBox>().PlayNextConversation();
+        var player = GameObject.FindWithTag("Player");
+        Destroy(player);
         FindFirstObjectByType<SceneLoader>().LoadNextScene();
         yield return null;
     }
