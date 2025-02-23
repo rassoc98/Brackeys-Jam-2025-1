@@ -297,7 +297,14 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SFXIcon_0: -5759147329308700530
+      SFXIcon_1: 759238044887090842
+      SFXIcon_2: 1112554863232052883
+      SFXIcon_3: -3864136942130529731
+      SFXIcon_4: 3747155915327908514
+      SFXIcon_5: 415904944869584139
+      SFXIcon_6: -4065480340055952161
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

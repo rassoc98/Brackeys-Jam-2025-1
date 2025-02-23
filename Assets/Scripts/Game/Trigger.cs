@@ -7,25 +7,25 @@ namespace Game
 [RequireComponent(typeof(Collider2D))]
 public class Trigger : MonoBehaviour
 {
-    [SerializeField] private bool triggeredOnce = true;
-    [SerializeField] private float delay;
+    [SerializeField] protected bool triggeredOnce = true;
+    [SerializeField] protected float delay;
     
-    private bool _isTriggered;
+    protected bool IsTriggered;
 
-    private void Awake()
+    protected void Awake()
     {
         GetComponent<Collider2D>().isTrigger = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Player") || (triggeredOnce && _isTriggered)) return;
+        if (!collision.CompareTag("Player") || (triggeredOnce && IsTriggered)) return;
         
-        _isTriggered = true;
+        IsTriggered = true;
         StartCoroutine(HandleTrigger());
     }
 
-    private IEnumerator HandleTrigger()
+    protected virtual IEnumerator HandleTrigger()
     {
         var isInvoked = false;
         var timer = 0f;

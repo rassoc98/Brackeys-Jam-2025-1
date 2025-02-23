@@ -297,6 +297,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: abe70c2c5302648459a90eac5344aa48, type: 3}
     volume: 0.5
     pitch: 1
+  - name: Explosion
+    clip: {fileID: 8300000, guid: 7a9f9fd3d5a7544ceb1220479c6b456b, type: 3}
+    volume: 0.5
+    pitch: 1
   soundtrack:
     soundTrack:
     - sceneName: Title Screen

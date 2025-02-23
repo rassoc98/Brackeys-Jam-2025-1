@@ -1,37 +1,25 @@
 fileFormatVersion: 2
-guid: 3b82dde3f56784505bd42dc5da9ab524
+guid: 58dab73a47f3041e893eed392f09b5dc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1070925824124606916
-    second: MasterIcon_0
+      213: -3551461470264695732
+    second: AnimationSprite_0
   - first:
-      213: -7218267273497231783
-    second: MasterIcon_1
+      213: -9200760115217844983
+    second: AnimationSprite_1
   - first:
-      213: -7726371826686564324
-    second: MasterIcon_2
+      213: 8337292642474085308
+    second: AnimationSprite_2
   - first:
-      213: -711941902772538425
-    second: MasterIcon_3
+      213: -1126198198781106393
+    second: AnimationSprite_3
   - first:
-      213: -7061833731514862500
-    second: MasterIcon_4
+      213: -1108884127798379838
+    second: AnimationSprite_4
   - first:
-      213: 3934284079359230350
-    second: MasterIcon_5
-  - first:
-      213: 1355120220601683383
-    second: MasterIcon_6
-  - first:
-      213: -3476923725132057632
-    second: MasterIcon_7
-  - first:
-      213: -7729748034686693585
-    second: MasterIcon_8
-  - first:
-      213: -1591126933034678518
-    second: MasterIcon_9
+      213: 2648048474973437057
+    second: AnimationSprite_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -64,7 +52,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -78,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 8
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -102,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -140,221 +128,133 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MasterIcon_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 9
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4c95dbfec51bcde00800000000000000
-      internalID: 1070925824124606916
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MasterIcon_1
-      rect:
-        serializedVersion: 2
-        x: 3
-        y: 3
-        width: 8
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 95ebe55a82093db90800000000000000
-      internalID: -7218267273497231783
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MasterIcon_2
-      rect:
-        serializedVersion: 2
-        x: 10
-        y: 3
-        width: 8
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c18e2cb72c966c490800000000000000
-      internalID: -7726371826686564324
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MasterIcon_3
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 3
-        width: 8
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7c3f6888c9cae16f0800000000000000
-      internalID: -711941902772538425
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MasterIcon_4
-      rect:
-        serializedVersion: 2
-        x: 24
-        y: 3
-        width: 8
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c547f2ae2a35ffd90800000000000000
-      internalID: -7061833731514862500
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MasterIcon_5
-      rect:
-        serializedVersion: 2
-        x: 31
-        y: 3
-        width: 8
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e818ea38682699630800000000000000
-      internalID: 3934284079359230350
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MasterIcon_6
-      rect:
-        serializedVersion: 2
-        x: 38
-        y: 3
-        width: 8
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7bd89e039aa5ec210800000000000000
-      internalID: 1355120220601683383
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MasterIcon_7
-      rect:
-        serializedVersion: 2
-        x: 42
-        y: 9
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0e330642b4c7fbfc0800000000000000
-      internalID: -3476923725132057632
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MasterIcon_8
+      name: Boss Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 7
-        height: 7
+        width: 64
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f2fc93dcd1b6ab490800000000000000
-      internalID: -7729748034686693585
+      spriteID: becd420ea724e4f43bb013d43add1acd
+      internalID: 249709593
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MasterIcon_9
+      name: Boss Sheet_1
       rect:
         serializedVersion: 2
-        x: 42
+        x: 64
         y: 0
-        width: 7
-        height: 7
+        width: 64
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a0749eb0c7e2be9e0800000000000000
-      internalID: -1591126933034678518
+      spriteID: f936588cbf68c404abfbc34d312d9cb7
+      internalID: 1232672857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d75020d0ff8d45a9a917df65e6b4126
+      internalID: -1589282491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15d4ee114508c4082823f3e3573e69fc
+      internalID: -1792498882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31a0cbaff89594fe0839f73c00d78fdf
+      internalID: -987602120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90dd01e0940b340df9ae05aaaf1fe753
+      internalID: 1867586957
       vertices: []
       indices: 
       edges: []
@@ -363,7 +263,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -373,16 +273,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MasterIcon_0: 1070925824124606916
-      MasterIcon_1: -7218267273497231783
-      MasterIcon_2: -7726371826686564324
-      MasterIcon_3: -711941902772538425
-      MasterIcon_4: -7061833731514862500
-      MasterIcon_5: 3934284079359230350
-      MasterIcon_6: 1355120220601683383
-      MasterIcon_7: -3476923725132057632
-      MasterIcon_8: -7729748034686693585
-      MasterIcon_9: -1591126933034678518
+      Boss Sheet_0: 249709593
+      Boss Sheet_1: 1232672857
+      Boss Sheet_2: -1589282491
+      Boss Sheet_3: -1792498882
+      Boss Sheet_4: -987602120
+      Boss Sheet_5: 1867586957
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
