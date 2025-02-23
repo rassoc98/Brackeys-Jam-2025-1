@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Audio;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -61,6 +62,7 @@ public class DialogueBox : MonoBehaviour
         
         while (text != string.Empty)
         {
+            AudioManager.Instance.PlaySound("Talk");
             dialogueText.text += text[0];
             text = text[1..];
             yield return new WaitForSeconds(charAppearDelay);

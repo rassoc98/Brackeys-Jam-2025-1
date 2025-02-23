@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 namespace Audio
 {
@@ -11,25 +11,43 @@ namespace Audio
 ///     Sound could be played by using AudioManager.Instance.PlaySound(soundName, [optional] position, [optional] volume).
 /// </summary>
 
-// TODO: Music
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    [SerializeField] private Sound[] sounds;
+    [SerializeField] private Audio[] sounds;
+    [SerializeField] private SoundTrack soundtrack;
     [SerializeField] private GameObject soundObjectPrefab;
+    [SerializeField] private AudioSource musicSource;
     
     private AudioSource _audioSource;
 
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+            DontDestroyOnLoad(this);
+        }
         else
+        {
             Destroy(gameObject);
-        
+        }
+
         _audioSource = GetComponent<AudioSource>();
+        SceneLoader.OnSceneChanged += UpdateMusic;
+        musicSource.loop = true;
+        musicSource.clip =
+            SceneManager.GetActiveScene().buildIndex == 0 ?
+            soundtrack["Title Screen"].audio.clip :
+            soundtrack["Gameplay"].audio.clip;
+    }
+
+    private void Start()
+    {
+        UpdateMusic();
+        musicSource.Play();
     }
     
     public void PlaySound(string soundName, Vector3 position = new(), float volume = 0.5f)
@@ -45,6 +63,16 @@ public class AudioManager : MonoBehaviour
         _audioSource.volume = (sound.volume + volume) / 2f;
         _audioSource.pitch = sound.pitch;
         _audioSource.Play();
+    }
+
+    private void UpdateMusic()
+    {
+        var currentScene  = SceneManager.GetActiveScene();
+        if (currentScene.buildIndex != 1) return;
+        
+        musicSource.Stop();
+        musicSource.clip = soundtrack["Gameplay"].audio.clip;
+        musicSource.Play();
     }
 
     private IEnumerator Play(string soundName, Vector3 position = new(), float volume = 0.5f)
@@ -67,9 +95,23 @@ public class AudioManager : MonoBehaviour
     }
 }
 
-// Sound information
 [Serializable]
-internal class Sound
+internal class SoundTrack
+{
+    public Music[] soundTrack;
+    public Music this[string sceneName] => Array.Find(soundTrack, music => music.sceneName == sceneName);
+}
+
+[Serializable]
+internal class Music
+{
+    public string sceneName;
+    public Audio audio;
+}
+
+// Audio information
+[Serializable]
+internal class Audio
 {
     public string name;
     public AudioClip clip;
